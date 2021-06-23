@@ -1,23 +1,40 @@
 package com.example.demo.Services;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Base64;
 
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
+
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Base64;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
 
 @Service
 public class FileService {
+    @Autowired
+    private Environment env;
     
-    public void saveFile(String nomFichier ,String hashValue, String base64) {
-        File file = new File(nomFichier);
-        try( FileOutputStream fos = new FileOutputStream(file);)
+    public void saveFile(String hashNomFichier , String base64) {
+        File fileName = new File(hashNomFichier+".pdf");
+        String fileLocation = new File("src/main/resources/static/uploads").getAbsolutePath() + "/" + fileName;
+        try( FileOutputStream fos = new FileOutputStream(fileLocation);)
         {
-           
             byte[] decoder = Base64.getDecoder().decode(base64);
             fos.write(decoder);
+            fos.flush();
+            fos.close();
             System.out.println("PDF Saved");
         }catch(Exception e)
         {
@@ -25,4 +42,48 @@ public class FileService {
         }
         
     }
+
+    public String getFile(String  nomFichier, String  hashNomFichier, String hashBase64) throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        //__récupération du fichier en question
+       String base64Pdf =  encodeFileToBase64(hashNomFichier + ".pdf");
+        //__ fin récupération du fichier en question
+        //__ hasher le résultat
+        String newHashValueForPDF = hashString(base64Pdf);
+        //__ fin hasher le résultat
+        if(hashBase64.equals(newHashValueForPDF))
+        {
+            return "meme";
+        }
+        else
+        {
+            return base64Pdf;
+        }
+        
+    }
+    
+    public String hashString(String stringToHash) throws NoSuchAlgorithmException, InvalidKeySpecException
+    {
+        //__generer hash du nom du fichier
+        String secretSalt = env.getProperty("secret_salt");
+        byte[] secretSaltInBytes = secretSalt.getBytes(Charset.forName("UTF-8"));
+        KeySpec spec = new PBEKeySpec(stringToHash.toCharArray(), secretSaltInBytes, 65536, 128);
+        SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+        byte[] hash = factory.generateSecret(spec).getEncoded();
+        Base64.Encoder enc = Base64.getEncoder();
+        String hashToString = enc.encodeToString(hash);
+        //__fin generer hash du nom du fichier
+        return hashToString;
+    }
+
+    private static String encodeFileToBase64(String fileName) {
+        File file = new File("src/main/resources/static/uploads/"+fileName);
+        try {
+            byte[] fileContent = Files.readAllBytes(file.toPath());
+            return Base64.getEncoder().encodeToString(fileContent);
+        } catch (IOException e) {
+            throw new IllegalStateException("could not read file " + file, e);
+        }
+    }
+
 }
