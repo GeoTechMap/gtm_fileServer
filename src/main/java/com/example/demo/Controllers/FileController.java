@@ -50,7 +50,7 @@ class GetFileRequest {
 }
 
 @Data
-class FileResponse{
+class GetFileResponse{
     private String base64File;
     private String message;
 
@@ -73,42 +73,20 @@ public class FileController {
     {
         fichierService.saveFile(fileRequest.getHashNomFichier(), fileRequest.getBase64());
         return "POST Done";
-
-
-        // String secretSalt = env.getProperty("secret_salt");
-        // System.out.println(secretSalt);
-
-        // SecureRandom random = new SecureRandom();
-        // byte[] salt = new byte[16];
-        // random.nextBytes(salt);
-
-        // KeySpec spec = new PBEKeySpec(fileRequest.getNomFichier().toCharArray(), salt, 65536, 128);
-        // SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-        // byte[] hash = factory.generateSecret(spec).getEncoded();
-        // Base64.Encoder enc = Base64.getEncoder();
-        // String hashToString = enc.encodeToString(hash);
-        // System.out.printf(hashToString);
        
     }
     @PostMapping(path = "/getfile")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody
-    public String getFile(@RequestBody GetFileRequest fileRequest) throws NoSuchAlgorithmException, InvalidKeySpecException 
+    public GetFileResponse getFile(@RequestBody GetFileRequest fileRequest) throws NoSuchAlgorithmException, InvalidKeySpecException 
     {
        String base64 = fichierService.getFile(fileRequest.getNomFichier(),fileRequest.getHashNomFichier(),  fileRequest.getHashBase64());
-       return base64;
+       GetFileResponse fileResponse = new GetFileResponse();
+       fileResponse.setBase64File(base64);
+       return fileResponse;
 
     }
 
-    // @PostMapping
-    // @ResponseStatus(HttpStatus.CREATED)
-    // @ResponseBody
-    // public FileResponse getFile(@RequestBody FileRequestGet fileRequest)
-    // {
-    //     KeySpec spec = new PBEKeySpec(fileRequest.getNomFichier().toCharArray(), salt, 65536, 128);
-    //     SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-    //     byte[] hash = factory.generateSecret(spec).getEncoded();
-    // }
 }
 
 // POST

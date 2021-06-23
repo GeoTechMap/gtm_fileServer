@@ -51,15 +51,17 @@ public class FileService {
         //__ hasher le résultat
         String newHashValueForPDF = hashString(base64Pdf);
         //__ fin hasher le résultat
+        System.out.println(hashBase64);
+        System.out.println(newHashValueForPDF);
         if(hashBase64.equals(newHashValueForPDF))
         {
-            return "meme";
+            
+            return base64Pdf;
         }
         else
         {
-            return base64Pdf;
+            return "Error no such File";
         }
-        
     }
     
     public String hashString(String stringToHash) throws NoSuchAlgorithmException, InvalidKeySpecException
