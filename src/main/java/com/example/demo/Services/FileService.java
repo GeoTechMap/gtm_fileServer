@@ -51,6 +51,7 @@ public class FileService {
         //__ hasher le résultat
         String newHashValueForPDF = hashString(base64Pdf);
         //__ fin hasher le résultat
+        
         System.out.println(hashBase64);
         System.out.println(newHashValueForPDF);
         if(hashBase64.equals(newHashValueForPDF))
@@ -79,6 +80,7 @@ public class FileService {
     }
 
     private static String encodeFileToBase64(String fileName) {
+        System.out.println("======================="+fileName);
         File file = new File("src/main/resources/static/uploads/"+fileName);
         try {
             byte[] fileContent = Files.readAllBytes(file.toPath());
