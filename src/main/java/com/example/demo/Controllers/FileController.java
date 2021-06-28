@@ -40,6 +40,7 @@ class FileRequest {
 class SaveFileRequest {
     String hashNomFichier;
     String base64;
+    String nomFichierASuprimmer;
 }
 
 @Data
@@ -71,7 +72,11 @@ public class FileController {
     @ResponseBody
     public String saveFile(@RequestBody SaveFileRequest fileRequest) 
     {
-        fichierService.saveFile(fileRequest.getHashNomFichier(), fileRequest.getBase64());
+        System.out.println("########### request received: "+ fileRequest);
+        fichierService.saveFile(
+            fileRequest.getHashNomFichier(), 
+            fileRequest.getBase64(), 
+            fileRequest.getNomFichierASuprimmer());
         return "POST Done";
        
     }
@@ -80,6 +85,8 @@ public class FileController {
     @ResponseBody
     public GetFileResponse getFile(@RequestBody GetFileRequest fileRequest) throws NoSuchAlgorithmException, InvalidKeySpecException 
     {
+        // System.out.println("########### hash du nom de fichier: "+ fileRequest.getHashNomFichier());
+        // System.out.println("########### hash du Base64 : "+ fileRequest.getHashBase64());
        String base64 = fichierService.getFile(fileRequest.getNomFichier(),fileRequest.getHashNomFichier(),  fileRequest.getHashBase64());
        GetFileResponse fileResponse = new GetFileResponse();
        fileResponse.setBase64File(base64);
