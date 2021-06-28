@@ -26,7 +26,7 @@ public class FileService {
     @Autowired
     private Environment env;
     
-    public void saveFile(String hashNomFichier , String base64) {
+    public void saveFile(String hashNomFichier , String base64, String nomFichierASuprimmer) {
         File fileName = new File(hashNomFichier+".pdf");
         String fileLocation = new File("src/main/resources/static/uploads").getAbsolutePath() + "/" + fileName;
         try( FileOutputStream fos = new FileOutputStream(fileLocation);)
@@ -36,6 +36,15 @@ public class FileService {
             fos.flush();
             fos.close();
             System.out.println("PDF Saved");
+            if(nomFichierASuprimmer.length() > 0){
+                File file = new File("src/main/resources/static/uploads/"+nomFichierASuprimmer+".pdf");
+                if(file.delete()){
+                    System.out.println("File deleted successfully");
+                } else{
+                    System.out.println("Failed to delete the file");
+                } 
+            }
+            
         }catch(Exception e)
         {
             e.printStackTrace();
