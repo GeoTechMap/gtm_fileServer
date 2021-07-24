@@ -1,0 +1,7 @@
+com/example/demo/Controllers/FileController.class
+com/example/demo/Services/FileService.class
+com/example/demo/FileServerApplication.class
+com/example/demo/Controllers/FileRequest.class
+com/example/demo/Controllers/GetFileRequest.class
+com/example/demo/Controllers/GetFileResponse.class
+com/example/demo/Controllers/SaveFileRequest.class
