@@ -226,9 +226,9 @@ const [totalEssais, setTotalEssais] = useState(0);
               return (
               <CCollapse show={details.includes(index)}>
                 <Test essai = {item} />
-                {globalData.connectedUser ?
+                {UserService.connectedUser ?
                 <>
-                  {globalData.connectedUser.institution.id === item.idInstitution ?
+                  {UserService.connectedUser.institution.id === item.idInstitution ?
                   <CCardBody>
                     <a href={`/#/tests/edit/${item.idEssai}`}> 
                       <CButton size="sm" color="info">
