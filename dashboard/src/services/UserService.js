@@ -1,6 +1,29 @@
 import Keycloak from "keycloak-js";
 
-const _kc = new Keycloak('/keycloak.json');
+
+const keycloakConfig = {
+  url: 'http://ec2-3-136-108-222.us-east-2.compute.amazonaws.com:8080/auth/', 
+  realm: 'GTM', 
+  clientId: 'gtm_app',
+  sslRequired: "none",
+  credentials: {
+  "secret": "87ebd86a-cce7-41bb-a902-1e1fc63046be"
+  }
+}
+
+// "realm": "GTM",
+// "auth-server-url": "http://ec2-3-136-108-222.us-east-2.compute.amazonaws.com:8080/auth/",
+// "ssl-required": "none",
+// "resource": "gtm_app",
+// "public-client": true,
+// "verify-token-audience": true,
+// "use-resource-role-mappings": true,
+// "confidential-port": 0,
+// "credentials": {
+//   "secret": "87ebd86a-cce7-41bb-a902-1e1fc63046be"
+// }
+// const _kc = new Keycloak('/keycloak.json');
+const _kc = new Keycloak(keycloakConfig);
 
 /**
  * Initializes Keycloak instance and calls the provided callback function if successfully authenticated.
@@ -41,6 +64,7 @@ const hasRole = (roles) => roles.some((role) => _kc.hasRealmRole(role));
 
 const getConnectedUser = () =>fetch(`${process.env.REACT_APP_API_URL}/api/utilisateurs/search?username=${getUsername()}`)
   .then((response) => response.json())
+  .catch((err) => console.log(err))
   // .then((json)=> user=json)
 
 

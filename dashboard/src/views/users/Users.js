@@ -4,6 +4,7 @@ import {
   CDataTable,
   CButton,
   CCollapse,
+  CLink
 } from '@coreui/react'
 import User from "./User";
 import UserService from "../../../src/services/UserService";
@@ -77,10 +78,10 @@ import ClipLoader from "react-spinners/ClipLoader";
   const [loadingState, setLoadingState] = useState(false);
   return (
     <div>
-          <a href="/#/utilisateurs/create" >   
+          <CLink to="/utilisateurs/create" >   
             <CButton variant="outline" color="success">Ajouter</CButton>
             <ClipLoader loading={loadingState} size={25} />
-          </a>
+          </CLink>
             
           <CDataTable
       items={data ? data : null}
@@ -124,11 +125,11 @@ import ClipLoader from "react-spinners/ClipLoader";
               <CCollapse show={details.includes(index)}>
                 <User utilisateur = {item} />
                 <CCardBody>
-                  <a href={`/#/utilisateurs/edit/${item.id}`}> 
+                  <CLink to={`/#/utilisateurs/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>
-                  </a>
+                  </CLink>
                   <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
                     Supprimmer
                   </CButton>

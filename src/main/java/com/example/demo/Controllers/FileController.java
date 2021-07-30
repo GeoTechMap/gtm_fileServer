@@ -57,7 +57,7 @@ class GetFileResponse{
 
 }
 
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://ec2-3-22-81-163.us-east-2.compute.amazonaws.com:8080"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001", "http://ec2-3-137-195-79.us-east-2.compute.amazonaws.com:8080"})
 @RestController
 @RequestMapping("/api/file")
 public class FileController {

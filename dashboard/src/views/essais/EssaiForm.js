@@ -40,6 +40,14 @@ const [globalData, setGlobalData] = useContext(EssaiContext);
           setAllTestTypes(json)
          return json;})
 
+      fetch(`${process.env.REACT_APP_API_URL}/api/utilisateurs/search?username=${UserService.getUsername()}`)
+      .then((response) => response.json())
+      .then((res)=> 
+      setAllInstitutions([{
+        id: res.institution.id, 
+        nom: res.institution.nom }])
+      )
+
          setAllDepartements([
            {id:'Artibonite',nom:'Artibonite'},
            {id:'Centre',nom:'Centre'},
@@ -65,9 +73,13 @@ const [globalData, setGlobalData] = useContext(EssaiContext);
       //   setAllInstitutions(json)
       //   return json;})
 
-      setAllInstitutions([{
-        id: globalData.connectedUser ? globalData.connectedUser.institution.id : null, 
-        nom: globalData.connectedUser ? globalData.connectedUser.institution.nom : null}])
+
+
+      // setAllInstitutions([{
+      //   id: UserService.connectedUser ? UserService.connectedUser.institution.id : null, 
+      //   nom: UserService.connectedUser ? UserService.connectedUser.institution.nom : null}])
+
+
       // .then((json) => setInitVal({...initVal,
       //   institution:json[0].id,
       // }))

@@ -45,7 +45,7 @@ const Essai = (props) => {
               {/* <li>Créé le : {props.essai.createdDateEssai}</li> */}
               <li>Date de réalisation: {props.essai.dateRealisationEssai}</li>
               {/* <li>Dernière modification : {props.essai.lastModifiedDateEssai}</li>
-              <li>Modifié par: <a href="www.google.com">{props.essai.lastModifiedByEssai}</a></li> */}
+              <li>Modifié par: {props.essai.lastModifiedByEssai}</li> */}
               <li onClick={() => handleOnClick(props.essai)}><Link 
                 to={`/pdf/${props.essai.idFichier}`} 
                 >Voir PDF

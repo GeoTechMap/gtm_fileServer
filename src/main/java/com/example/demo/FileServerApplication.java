@@ -2,12 +2,21 @@ package com.example.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class FileServerApplication {
+public class FileServerApplication extends  SpringBootServletInitializer{
+	
+	@Override
+	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
+		return builder.sources(FileServerApplication.class);
+	}
+	
 
 	public static void main(String[] args) {
 		SpringApplication.run(FileServerApplication.class, args);
 	}
+	
 
 }
