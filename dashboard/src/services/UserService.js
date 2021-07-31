@@ -2,7 +2,7 @@ import Keycloak from "keycloak-js";
 
 
 const keycloakConfig = {
-  url: 'http://ec2-3-136-108-222.us-east-2.compute.amazonaws.com:8080/auth/', 
+  url: `${process.env.REACT_APP_AUTH_SERVER_URL}/auth/`, 
   realm: 'GTM', 
   clientId: 'gtm_app',
   sslRequired: "none",

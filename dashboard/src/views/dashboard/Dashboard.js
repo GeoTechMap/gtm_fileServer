@@ -58,6 +58,11 @@ const Dashboard = () => {
   const [listNomsTypeEssais, setListNomsTypeEssais] = useState([]);
   const [listValeursTypeEssais, setListValeursTypeEssais] = useState([]);
 
+
+  if (globalData === undefined) {
+    return <>Chargement ...</>;
+  }
+
   return (
     <>
       <WidgetsDropdown />

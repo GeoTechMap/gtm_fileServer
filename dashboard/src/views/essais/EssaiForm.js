@@ -295,6 +295,7 @@ const [loadingState, setLoadingState] = useState(false);
         if(!isPDFPresent){//s'il n'y a aucun document
           // alert('Noooooo')
           console.log("no document");
+          setLoadingState(false);
         }else{
         function first(){
           return new Promise(function(resolve, reject){

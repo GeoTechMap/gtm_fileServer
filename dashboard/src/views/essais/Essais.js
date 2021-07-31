@@ -81,7 +81,7 @@ import UserService from "../../../src/services/UserService";
           setShowError(true)
           setLoadingState(false);
         })
-      const newList = data.filter((item) => item.id !== id);
+      const newList = data.filter((item) => item.idEssai !== id);
       setData(newList);
     } 
 
@@ -163,9 +163,13 @@ import UserService from "../../../src/services/UserService";
 const [pageSize, setPageSize] = useState(5)
 const [currentPage, setActivePage] = useState(0);
 const [totalEssais, setTotalEssais] = useState(0);
+
+if (connectedUser.institution === undefined) {
+  return <>Chargement ...</>;
+}
   return (
     <div>
-          <CLink to="/#/tests/create" >   
+          <CLink to="/tests/create" >   
             <CButton variant="outline" color="success">Ajouter</CButton>
             <ClipLoader loading={loadingStateHead} size={25} />
          </CLink>
@@ -238,7 +242,8 @@ const [totalEssais, setTotalEssais] = useState(0);
                 <Test essai = {item} />
                 {connectedUser ?
                 <>
-                  {connectedUser.institution.id === item.idInstitution ?
+                  {
+                  connectedUser.institution.id === item.idInstitution ?
                   <CCardBody>
                     <CLink to={`/tests/edit/${item.idEssai}`}> 
                       <CButton size="sm" color="info">
