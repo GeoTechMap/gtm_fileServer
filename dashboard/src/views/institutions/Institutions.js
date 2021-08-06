@@ -10,6 +10,7 @@ import {
   CToastBody,
   CToastHeader,
   CToaster,
+  CLink
 } from '@coreui/react'
 import Institution from "./Institution";
 import UserService from "../../../src/services/UserService";
@@ -102,10 +103,10 @@ import ClipLoader from "react-spinners/ClipLoader";
 
   return (
     <div>
-          <a href="/#/institutions/create" >   
+          <CLink to="/institutions/create" >   
             <CButton variant="outline" color="success">Ajouter</CButton>
             <ClipLoader loading={loadingStateHead} size={25} />
-          </a>
+          </CLink>
             
           <CDataTable
       items={data ? data : null}
@@ -141,11 +142,11 @@ import ClipLoader from "react-spinners/ClipLoader";
               <CCollapse show={details.includes(index)}>
                 <Institution institution = {item} />
                 <CCardBody>
-                  <a href={`/#/institutions/edit/${item.id}`}> 
+                  <CLink to={`/institutions/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>
-                  </a>
+                  </CLink>
                   <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
                     Supprimmer  <ClipLoader loading={loadingState} size={15} />
                   </CButton>

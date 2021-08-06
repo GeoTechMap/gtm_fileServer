@@ -23,7 +23,7 @@ export const EssaiContextProvider = props => {
             .then((json) => 
             setGlobalData({...globalData,
               connectedUser:data,
-            listeNomTypeEssais:json.map((typeEssai) => typeEssai.nom),
+            listeNomTypeEssais:json.map((typeEssai) => typeEssai.sigle ? typeEssai.sigle : typeEssai.nom.substring(0,3)),
             listValeursTypeEssais: json.map((typeEssai) => typeEssai.essais.length) ,
             listCouleurTypeEssais: json.map((typeEssai) => `#${typeEssai.codeCouleur}`) 
           }))

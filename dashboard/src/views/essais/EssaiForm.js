@@ -40,6 +40,14 @@ const [globalData, setGlobalData] = useContext(EssaiContext);
           setAllTestTypes(json)
          return json;})
 
+      fetch(`${process.env.REACT_APP_API_URL}/api/utilisateurs/search?username=${UserService.getUsername()}`)
+      .then((response) => response.json())
+      .then((res)=> 
+      setAllInstitutions([{
+        id: res.institution.id, 
+        nom: res.institution.nom }])
+      )
+
          setAllDepartements([
            {id:'Artibonite',nom:'Artibonite'},
            {id:'Centre',nom:'Centre'},
@@ -65,9 +73,13 @@ const [globalData, setGlobalData] = useContext(EssaiContext);
       //   setAllInstitutions(json)
       //   return json;})
 
-      setAllInstitutions([{
-        id: globalData.connectedUser ? globalData.connectedUser.institution.id : null, 
-        nom: globalData.connectedUser ? globalData.connectedUser.institution.nom : null}])
+
+
+      // setAllInstitutions([{
+      //   id: UserService.connectedUser ? UserService.connectedUser.institution.id : null, 
+      //   nom: UserService.connectedUser ? UserService.connectedUser.institution.nom : null}])
+
+
       // .then((json) => setInitVal({...initVal,
       //   institution:json[0].id,
       // }))
@@ -259,12 +271,20 @@ const getBase64 = (file, callback) => {
 
 const handleChange = (event) => {
   const file = event.currentTarget.files[0];
-  setMyFile({file: event.target.files[0]});//for just getting the name outside of the function
-  getBase64(file, (result) => {
-    setDataForAPI({...dataForAPI, pdf:result.substr(result.indexOf(',') + 1)})
- 
-  });
-  setIsPDFPresent(true);
+  if(file.size < 2000048){
+    if(file.type === 'application/pdf'){
+      setMyFile({file: event.target.files[0]});//for just getting the name outside of the function
+      getBase64(file, (result) => {
+        setDataForAPI({...dataForAPI, pdf:result.substr(result.indexOf(',') + 1)})
+     
+      });
+      setIsPDFPresent(true);
+    }else{
+      console.log('Must choose a PDF file')
+    }
+  }else{
+    console.log('Max file size is 2 MB')
+  }
 };
 
 const [isPDFPresent, setIsPDFPresent] = useState(false);
@@ -283,6 +303,7 @@ const [loadingState, setLoadingState] = useState(false);
         if(!isPDFPresent){//s'il n'y a aucun document
           // alert('Noooooo')
           console.log("no document");
+          setLoadingState(false);
         }else{
         function first(){
           return new Promise(function(resolve, reject){

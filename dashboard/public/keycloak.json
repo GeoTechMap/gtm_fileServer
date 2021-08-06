@@ -1,6 +1,6 @@
 {
   "realm": "GTM",
-  "auth-server-url": "http://ec2-3-139-102-254.us-east-2.compute.amazonaws.com:8080/auth/",
+  "auth-server-url": "http://ec2-3-136-108-222.us-east-2.compute.amazonaws.com:8080/auth/",
   "ssl-required": "none",
   "resource": "gtm_app",
   "public-client": true,

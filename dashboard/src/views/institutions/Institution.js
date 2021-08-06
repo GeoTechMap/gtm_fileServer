@@ -21,9 +21,9 @@ const Institution = (props) => {
               <li>Numéro fiscal: {props.institution.numeroFiscal}</li>
               <li>Description : {props.institution.description}</li>
               <li>Créée le : {props.institution.createdDate}</li>
-              <li>Créée par : <a href="www.google.com">{props.institution.createdBy}</a></li>
+              <li>Créée par :{props.institution.createdBy}</li>
               <li>Dernière modification : {props.institution.lastModifiedDate}</li>
-              <li>Modifiée par: <a href="www.google.com">{props.institution.lastModifiedBy}</a></li>
+              <li>Modifiée par:{props.institution.lastModifiedBy}</li>
               <li><a href={`${process.env.REACT_APP_AUTH_SERVER_URL}/auth/admin/master/console/#/realms/GTM/`} target='_blank'>Gérer les utilisateurs</a></li>
             </ul>
           </CCardBody>

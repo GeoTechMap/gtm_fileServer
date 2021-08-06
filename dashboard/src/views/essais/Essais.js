@@ -13,6 +13,7 @@ import {
   CToaster,
   CSelect,
   CRow,
+  CLink
 
 } from '@coreui/react'
 import Test from "./Essai";
@@ -80,7 +81,7 @@ import UserService from "../../../src/services/UserService";
           setShowError(true)
           setLoadingState(false);
         })
-      const newList = data.filter((item) => item.id !== id);
+      const newList = data.filter((item) => item.idEssai !== id);
       setData(newList);
     } 
 
@@ -110,8 +111,17 @@ import UserService from "../../../src/services/UserService";
       .catch((error) => {
         console.log(error);
       }); 
+
+
+      fetch(`${process.env.REACT_APP_API_URL}/api/utilisateurs/search?username=${UserService.getUsername()}`)
+      .then((response) => response.json())
+      .then((res)=> 
+      setConnectedUser(res)
+      )
     
   }, [globalData]);
+
+  const [connectedUser, setConnectedUser] = useState({});
   // useEffect(() => {
   //   setLoadingStateHead(true);
 
@@ -153,12 +163,16 @@ import UserService from "../../../src/services/UserService";
 const [pageSize, setPageSize] = useState(5)
 const [currentPage, setActivePage] = useState(0);
 const [totalEssais, setTotalEssais] = useState(0);
+
+if (connectedUser.institution === undefined) {
+  return <>Chargement ...</>;
+}
   return (
     <div>
-          <a href="/#/tests/create" >   
+          <CLink to="/tests/create" >   
             <CButton variant="outline" color="success">Ajouter</CButton>
             <ClipLoader loading={loadingStateHead} size={25} />
-         </a>
+         </CLink>
     
 
          <CRow style={{float:'right'}}>
@@ -226,15 +240,16 @@ const [totalEssais, setTotalEssais] = useState(0);
               return (
               <CCollapse show={details.includes(index)}>
                 <Test essai = {item} />
-                {UserService.connectedUser ?
+                {connectedUser ?
                 <>
-                  {UserService.connectedUser.institution.id === item.idInstitution ?
+                  {
+                  connectedUser.institution.id === item.idInstitution ?
                   <CCardBody>
-                    <a href={`/#/tests/edit/${item.idEssai}`}> 
+                    <CLink to={`/tests/edit/${item.idEssai}`}> 
                       <CButton size="sm" color="info">
                         Modifier
                       </CButton>
-                    </a>
+                    </CLink>
                       <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.idEssai)}}>
                         Supprimmer
                       </CButton>

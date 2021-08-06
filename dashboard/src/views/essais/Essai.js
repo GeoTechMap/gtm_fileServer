@@ -14,15 +14,12 @@ const Essai = (props) => {
       <CCol lg={6}>
         <CCard>
           <CCardHeader  className="text-muted">
-           Identifiant de l'essai : {props.essai.idEssai}
+           Identifiant de l'essai : {props.essai.codeEssai}
           </CCardHeader>
           <CCardBody>
             <ul>
-              <li>Type d'essai :
-              {props.essai.idTypeEssai ?    <Link 
-                to={`/type_essais/edit/${props.essai.idTypeEssai}`} 
-                >{props.essai.nomTypeEssai}
-                </Link> 
+              <li>Type d'essai : 
+              {props.essai.idTypeEssai ?   props.essai.nomTypeEssai
                 : ''}
               </li>
               <li>
@@ -45,10 +42,10 @@ const Essai = (props) => {
               {/* <li>Créé le : {props.essai.createdDateEssai}</li> */}
               <li>Date de réalisation: {props.essai.dateRealisationEssai}</li>
               {/* <li>Dernière modification : {props.essai.lastModifiedDateEssai}</li>
-              <li>Modifié par: <a href="www.google.com">{props.essai.lastModifiedByEssai}</a></li> */}
+              <li>Modifié par: {props.essai.lastModifiedByEssai}</li> */}
               <li onClick={() => handleOnClick(props.essai)}><Link 
                 to={`/pdf/${props.essai.idFichier}`} 
-                >Voir PDF
+                >Voir résultat
                 </Link></li>
             </ul>
           </CCardBody>

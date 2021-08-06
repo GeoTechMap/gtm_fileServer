@@ -58,12 +58,17 @@ const Dashboard = () => {
   const [listNomsTypeEssais, setListNomsTypeEssais] = useState([]);
   const [listValeursTypeEssais, setListValeursTypeEssais] = useState([]);
 
+
+  if (globalData === undefined) {
+    return <>Chargement ...</>;
+  }
+
   return (
     <>
       <WidgetsDropdown />
       <CCard>
         <CCardHeader>
-          Types d'essai <strong>Versus</strong> nombre d'essais géotechniques
+       Graphe du nombre d'essais géotechniquess en fonctions de leur type
         </CCardHeader>
         <CCardBody>
           <CChartBar

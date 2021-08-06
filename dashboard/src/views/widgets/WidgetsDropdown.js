@@ -55,7 +55,7 @@ const WidgetsDropdown = () => {
     <CRow>
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          color="gradient-primary"
+          color="gradient-dark"
           header={String(totalEssais)}
           text="Essais géotechniques"
         >
@@ -64,7 +64,7 @@ const WidgetsDropdown = () => {
 
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          color="gradient-info"
+          color="gradient-dark"
           header={String(totalTypesEssais)}
           text="Types d'éssai"
         >
@@ -73,7 +73,7 @@ const WidgetsDropdown = () => {
 
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          color="gradient-warning"
+          color="gradient-dark"
           header={String(totalInstitutions)}
           text="Institutions"
         >
@@ -82,7 +82,7 @@ const WidgetsDropdown = () => {
 
       <CCol sm="6" lg="3">
         <CWidgetDropdown
-          color="gradient-danger"
+          color="gradient-dark"
           header={String(totalUtilisateurs)}
           text="Utilisateurs"
         >

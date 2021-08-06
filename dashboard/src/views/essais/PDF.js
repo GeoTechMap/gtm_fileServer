@@ -7,7 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 const LoadFromBase64Example = ({match}) => {
 
-
+    const [pdfTrouve, setPdfTrouve] = useState(true);
     const [data, setData] = useState({})
     useEffect(() => {
         setLoadingState(true);
@@ -28,6 +28,8 @@ const LoadFromBase64Example = ({match}) => {
                 .then(res => setData(res))
                 .catch((error) => {
                     console.error('Error:', error);
+                    setLoadingState(false);
+                    setPdfTrouve(false);
                   });
        return data;
      })
@@ -53,7 +55,8 @@ const LoadFromBase64Example = ({match}) => {
         <div className="App">
         <ClipLoader loading={loadingState} size={50} />
         <SinglePagePDFViewer pdf={`data:application/pdf;base64,${data.base64File}`}  />
-      </div>
+        {pdfTrouve === false ? <h6>Document non disponible pour le moment</h6>:''}
+     </div>
   
     );
 };

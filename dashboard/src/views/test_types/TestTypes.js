@@ -10,6 +10,7 @@ import {
   CToastBody,
   CToastHeader,
   CToaster,
+  CLink
 } from '@coreui/react'
 import TestType from "./TestType";
 import ClipLoader from "react-spinners/ClipLoader";
@@ -100,10 +101,10 @@ import UserService from "../../../src/services/UserService";
 
   return (
     <div>
-          <a href="/#/test_types/create" >   
+          <CLink to="/test_types/create" >   
             <CButton variant="outline" color="success">Ajouter</CButton>
             <ClipLoader loading={loadingStateHead} size={25} />
-          </a>
+          </CLink>
             
           <CDataTable
       items={data ? data : null}
@@ -139,11 +140,11 @@ import UserService from "../../../src/services/UserService";
               <CCollapse show={details.includes(index)}>
                 <TestType testType = {item} />
                 <CCardBody>
-                  <a href={`/#/test_types/edit/${item.id}`}> 
+                  <CLink to={`/test_types/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>
-                  </a>
+                  </CLink>
                   <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
                     Suprimmer   <ClipLoader loading={loadingState} size={15} />
                   </CButton>

@@ -25,10 +25,12 @@ import java.security.spec.KeySpec;
 public class FileService {
     @Autowired
     private Environment env;
+    // final static String gtmBucket = "src/main/resources/static/uploads";
+    final static String gtmBucket = "/home/gtm_bucket";
     
     public void saveFile(String hashNomFichier , String base64, String nomFichierASuprimmer) {
         File fileName = new File(hashNomFichier+".pdf");
-        String fileLocation = new File("src/main/resources/static/uploads").getAbsolutePath() + "/" + fileName;
+        String fileLocation = new File(gtmBucket).getAbsolutePath() + "/" + fileName;
         try( FileOutputStream fos = new FileOutputStream(fileLocation);)
         {
             byte[] decoder = Base64.getDecoder().decode(base64);
@@ -37,7 +39,7 @@ public class FileService {
             fos.close();
             System.out.println("PDF Saved");
             if(nomFichierASuprimmer.length() > 0){
-                File file = new File("src/main/resources/static/uploads/"+nomFichierASuprimmer+".pdf");
+                File file = new File(gtmBucket+"/"+nomFichierASuprimmer+".pdf");
                 if(file.delete()){
                     System.out.println("File deleted successfully");
                 } else{
@@ -90,7 +92,7 @@ public class FileService {
 
     private static String encodeFileToBase64(String fileName) {
         System.out.println("======================="+fileName);
-        File file = new File("src/main/resources/static/uploads/"+fileName);
+        File file = new File(gtmBucket+"/"+fileName);
         try {
             byte[] fileContent = Files.readAllBytes(file.toPath());
             return Base64.getEncoder().encodeToString(fileContent);
