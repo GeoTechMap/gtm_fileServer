@@ -142,7 +142,7 @@ import ClipLoader from "react-spinners/ClipLoader";
               <CCollapse show={details.includes(index)}>
                 <Institution institution = {item} />
                 <CCardBody>
-                  <CLink href={`/institutions/edit/${item.id}`}> 
+                  <CLink to={`/institutions/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>

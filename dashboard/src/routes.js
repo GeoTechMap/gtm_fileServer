@@ -42,7 +42,7 @@ const routes = [
   { path: '/tests', exact: true,  name: 'Essais ', component: Tests , roles:['OPERATEUR']},//READ
   { path: '/tests/edit/:id', exact: true, name: 'Modifier', component: TestForm , roles:['OPERATEUR']},//UPDATE
 
-  { path: '/pdf/:id', exact: true, name: 'Document PDF', component: PDF , roles:['ADMIN','OPERATEUR']}
+  { path: '/pdf/:id', exact: true, name: 'Résultat', component: PDF , roles:['ADMIN','OPERATEUR']}
 ];
 
 export default routes;

@@ -271,12 +271,20 @@ const getBase64 = (file, callback) => {
 
 const handleChange = (event) => {
   const file = event.currentTarget.files[0];
-  setMyFile({file: event.target.files[0]});//for just getting the name outside of the function
-  getBase64(file, (result) => {
-    setDataForAPI({...dataForAPI, pdf:result.substr(result.indexOf(',') + 1)})
- 
-  });
-  setIsPDFPresent(true);
+  if(file.size < 2000048){
+    if(file.type === 'application/pdf'){
+      setMyFile({file: event.target.files[0]});//for just getting the name outside of the function
+      getBase64(file, (result) => {
+        setDataForAPI({...dataForAPI, pdf:result.substr(result.indexOf(',') + 1)})
+     
+      });
+      setIsPDFPresent(true);
+    }else{
+      console.log('Must choose a PDF file')
+    }
+  }else{
+    console.log('Max file size is 2 MB')
+  }
 };
 
 const [isPDFPresent, setIsPDFPresent] = useState(false);

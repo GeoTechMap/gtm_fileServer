@@ -68,7 +68,7 @@ const Dashboard = () => {
       <WidgetsDropdown />
       <CCard>
         <CCardHeader>
-          Types d'essai <strong>VS</strong> nombre d'essais géotechniques
+       Graphe du nombre d'essais géotechniquess en fonctions de leur type
         </CCardHeader>
         <CCardBody>
           <CChartBar
