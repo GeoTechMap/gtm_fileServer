@@ -57,12 +57,16 @@ class GetFileResponse{
 
 }
 
- @CrossOrigin(origins = {
-    "http://3.129.81.68:8080",//webmap
-    "http://3.143.84.220:8080",//file server
-    "http://localhost:3000", 
-    "http://localhost:3001"
-})
+//  @CrossOrigin(origins = {
+//      "http://www.geotechmap.ueh.edu.ht",
+//      "http://www.admin.geotechmap.ueh.edu.ht",
+//      "http://geotechmap.ueh.edu.ht",
+//      "http://admin.geotechmap.ueh.edu.ht",
+//     "http://3.129.81.68:8080",//webmap
+//     "http://3.143.84.220:8080",//file server
+//     "http://localhost:3000", 
+//     "http://localhost:3001"
+// })
 
 @RestController
 @RequestMapping("/api/file")
@@ -86,6 +90,7 @@ public class FileController {
         return "POST Done";
        
     }
+    
     @PostMapping(path = "/getfile")
     @ResponseStatus(HttpStatus.CREATED)
     @ResponseBody

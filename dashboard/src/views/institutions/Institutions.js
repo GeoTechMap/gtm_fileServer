@@ -147,9 +147,9 @@ import ClipLoader from "react-spinners/ClipLoader";
                       Modifier
                     </CButton>
                   </CLink>
-                  <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
-                    Supprimmer  <ClipLoader loading={loadingState} size={15} />
-                  </CButton>
+                  {/* <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
+                    Supprimer  <ClipLoader loading={loadingState} size={15} />
+                  </CButton> */}
                 </CCardBody>
               </CCollapse>
             )

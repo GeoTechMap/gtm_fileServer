@@ -184,11 +184,11 @@ const BasicForms = ({match}) => {
                           <CFormText className="help-block">Veuillez entrer le site web de l'institution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
-                        <TextField label="Numéro social:" name="numeroFiscal" type="text" placeholder="Entrer le numéro social de l'institution.." autoComplete="numeroFiscal"/>
+                        <TextField label="Numéro social:" name="numeroFiscal" type="text" placeholder="Entrer le numéro social de l'institution..." autoComplete="numeroFiscal"/>
                         <CFormText className="help-block">Veuillez entrer le numéro social de l'intitution</CFormText>
                       </CFormGroup>
                       <CFormGroup>
-                        <TextField label="Description:" type="textarea" name="description" placeholder="Entrer la description de téléphone..." autoComplete="description"/>
+                        <TextField label="Description:" type="textarea" name="description" placeholder="Entrer la description de l'institution..." autoComplete="description"/>
                         <CFormText className="help-block">Veuillez entrer la description de l'institution</CFormText>
                       </CFormGroup>      
                     </CCardBody>

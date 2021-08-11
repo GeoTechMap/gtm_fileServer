@@ -145,9 +145,9 @@ import UserService from "../../../src/services/UserService";
                       Modifier
                     </CButton>
                   </CLink>
-                  <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
-                    Suprimmer   <ClipLoader loading={loadingState} size={15} />
-                  </CButton>
+                  {/* <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
+                    Supprimer   <ClipLoader loading={loadingState} size={15} />
+                  </CButton> */}
                 </CCardBody>
               </CCollapse>
             )

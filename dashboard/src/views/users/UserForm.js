@@ -239,8 +239,8 @@ const [dataForAPI = init, setDataForAPI] = useState();
                       </CFormGroup>
                       <CFormGroup>
                         <TextField label="Institution*:" name="institution" 
-                         type="select" options={allInstitutions} placeholder="Entrer l'institution" />
-                        <CFormText className="help-block">Veuillez entrer l'institution</CFormText>
+                         type="select" options={allInstitutions} placeholder="Entrer de l'utilisateur" />
+                        <CFormText className="help-block">Veuillez entrer de l'utilisateur</CFormText>
                       </CFormGroup>
                     </CCardBody>
                     <CCardFooter>

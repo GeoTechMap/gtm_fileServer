@@ -4,13 +4,23 @@ import {
   CDataTable,
   CButton,
   CCollapse,
-  CLink
+  CLink,
+  CCol,
+  CBadge,
+  CToast,
+  CToastBody,
+  CToastHeader,
+  CToaster
 } from '@coreui/react'
 import User from "./User";
 import UserService from "../../../src/services/UserService";
 import ClipLoader from "react-spinners/ClipLoader";
 
   const Utilisateurs = () => {
+          //__toaster
+  const [show, setShow] = useState(false);
+  const [showError, setShowError] = useState(false);
+  //__end toaster
   const [details, setDetails] = useState([])
 
   const toggleDetails = (index,id) => {
@@ -42,23 +52,37 @@ import ClipLoader from "react-spinners/ClipLoader";
     }
   ]
 
+  const [errorMessage, setErrorMessage] = useState('Echec du processus. Veuillez essayer ultérieurement !');
+  const [loadingState, setLoadingState] = useState(false);
+
   const onDelete = (id) => {
     if (window.confirm("Confirmer la suppression")) {
       const requestOptions = {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json',
+        'Authorization': `Bearer ${UserService.getToken()}`,
+        "Access-Control-Allow-Credentials" : true  },
       };
       fetch(`${process.env.REACT_APP_API_URL}/api/utilisateurs/`+id, requestOptions)
         .then(response => console.log(response))
+        .then(() => setShow(true))
+        .then(() => setLoadingState(false))
+        .catch((error) => {
+          console.log(error);
+          setShowError(true)
+          setLoadingState(false);
+        })
       const newList = data.filter((item) => item.id !== id);
       setData(newList);
-    } else {
-      
-    }
+    }     
+    
+    setTimeout(() => {
+      setShow(false)
+      setShowError(false);
+    }, 3000)
   }
 
-  function bearerAuth(token) {
-    return `Bearer ${token}`
-  }
+
 
   const [data, setData] = useState([])
   useEffect(() => {
@@ -75,7 +99,7 @@ import ClipLoader from "react-spinners/ClipLoader";
     
   }, []);
 
-  const [loadingState, setLoadingState] = useState(false);
+
   return (
     <div>
           <CLink to="/utilisateurs/create" >   
@@ -125,20 +149,60 @@ import ClipLoader from "react-spinners/ClipLoader";
               <CCollapse show={details.includes(index)}>
                 <User utilisateur = {item} />
                 <CCardBody>
-                  <CLink to={`/#/utilisateurs/edit/${item.id}`}> 
+                  <CLink to={`/utilisateurs/edit/${item.id}`}> 
                     <CButton size="sm" color="info">
                       Modifier
                     </CButton>
                   </CLink>
-                  <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
-                    Supprimmer
-                  </CButton>
+                  {/* <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.id)}}>
+                    Supprimer <ClipLoader loading={loadingState} size={15} />
+                  </CButton> */}
                 </CCardBody>
               </CCollapse>
             )
           }
       }}
     />
+
+       {/* SHOW SUCCES */}
+       <CCol sm="12" lg="6">
+    <CToaster
+      position={'top-right'}
+      > 
+          <CToast
+            show={show}
+            autohide={true && 4000}
+            fade={true}
+          >
+            <CToastHeader closeButton={true}>
+            <CBadge className="mr-1" color="success">SUCCÈS</CBadge>              
+            </CToastHeader>
+            <CToastBody  color="success">
+              Opération réussie !
+            </CToastBody>
+          </CToast>
+      </CToaster>
+    </CCol>
+
+    {/* SHOW ERROR */}
+    <CCol sm="12" lg="6">
+          <CToaster
+            position={'top-right'}
+          > 
+                <CToast
+                  show={showError}
+                  autohide={true && 4000}
+                  fade={true}
+                >
+                  <CToastHeader closeButton={true}>
+                  <CBadge className="mr-1" color="danger">ECHEC</CBadge>              
+                  </CToastHeader>
+                  <CToastBody  color="success">
+                    {errorMessage}
+                  </CToastBody>
+                </CToast>
+          </CToaster>
+        </CCol>
     </div>
     
   )
