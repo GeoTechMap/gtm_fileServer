@@ -84,7 +84,7 @@ const WidgetsDropdown = () => {
         <CWidgetDropdown
           color="gradient-dark"
           header={String(totalUtilisateurs)}
-          text="Utilisateurs"
+          text="Opérateurs"
         >
         </CWidgetDropdown>
       </CCol>

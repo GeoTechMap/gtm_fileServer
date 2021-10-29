@@ -289,6 +289,7 @@ const handleChange = (event) => {
 
 const [isPDFPresent, setIsPDFPresent] = useState(false);
 const [loadingState, setLoadingState] = useState(false);
+const myRefname= useRef(null);
 
   return (
     <div>
@@ -431,7 +432,7 @@ const [loadingState, setLoadingState] = useState(false);
                     // .then(res => console.log(res))
                   }
                   )
-                  
+                  .then(()=> myRefname.current.click())
                   .then(() => setShow(true))
                   .then(() => setLoadingState(false))
                // .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}))
@@ -534,7 +535,7 @@ const [loadingState, setLoadingState] = useState(false);
                       </CFormGroup> */}
                       <CFormGroup>
                         <TextField label="Date de réalisation: (jj/mm/aaaa)" name="dateRealisation" 
-                        type="text" placeholder="Entrer la date de réalisation de l'essai" autoComplete="dateRealisation"/>
+                        type="date" />
                         <CFormText className="help-block">Veuillez entrer la date de réalisation de l'essai (format: Jour/Mois/Année)</CFormText>
                       </CFormGroup>
                       <CFormGroup>
@@ -573,7 +574,7 @@ const [loadingState, setLoadingState] = useState(false);
                     {!dataForEdit && !isPDFPresent ? 
                       <CFormGroup row>
                       <CCol xs="12" md="12"> 
-                      <CFormText className="help-block"><span style={{color:'red'}}>Choisir un PDF*</span></CFormText>
+                      <CFormText className="help-block"><span style={{color:'red'}}>Choisir un PDF (Max 2MB)*</span></CFormText>
                       </CCol>
                     </CFormGroup>  
                     : ''}   
@@ -593,7 +594,7 @@ const [loadingState, setLoadingState] = useState(false);
                        >{match.params.id ? 'Modifier': 'Enregistrer'}
                       <ClipLoader loading={loadingState} size={15} />
                       </button>
-                      <button className="btn btn-danger mt-3 ml-3" type='reset'>Réinitialiser</button>
+                      <button className="btn btn-danger mt-3 ml-3" type='reset' ref={myRefname}>Réinitialiser</button>
                     </CCardFooter>
               </CCard>
             </CCol>

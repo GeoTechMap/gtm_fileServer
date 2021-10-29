@@ -91,11 +91,11 @@ const [dataForAPI = init, setDataForAPI] = useState();
   const validate = Yup.object({
     nom: Yup.string()
     .max(100,"Maximum 100 caractères")
-    .min(3,"3 caractères au minimum")
+    .min(2,"2 caractères au minimum")
     .required("Champs obligatire"),
     prenom: Yup.string()
     .max(45,"Maximum 45 caractères")
-    .min(3,"3 caractères au minimum"),
+    .min(2,"2 caractères au minimum"),
     adresse: Yup.string()
     .max(45,"Maximum 45 caractères")
     .min(3,"3 caractères au minimum")
@@ -118,7 +118,7 @@ const [dataForAPI = init, setDataForAPI] = useState();
   })
   
   const [loadingState, setLoadingState] = useState(false);
-  
+  const myRefname= useRef(null);
   return (
     <div>
     <Formik
@@ -164,12 +164,14 @@ const [dataForAPI = init, setDataForAPI] = useState();
               fetch(`${process.env.REACT_APP_API_URL}/api/utilisateurs/`, requestOptions)
               .then(response => response.json())
               // .then(data =>   setAlert({ ...alert,isActive: true, message: "Opération réussie !"}));
+              .then(()=> myRefname.current.click())
               .then(() => setShow(true))
               .then(() => setLoadingState(false))
-              .then(() => 
-              setTimeout(() => {
-                window.location.reload()
-              }, 3000))
+              .then(() => setAllKeycloalUserWithoutProfile(allKeycloalUserWithoutProfile.filter((item) => item !== values.username)))
+              // .then(() => 
+              // setTimeout(() => {
+              //   window.location.reload()
+              // }, 3000))
               .catch((error) => {
                 console.log(error);
                 setShowError(true)
@@ -249,7 +251,7 @@ const [dataForAPI = init, setDataForAPI] = useState();
                          >{match.params.id ? 'Modifier': 'Enregistrer'} 
                       <ClipLoader loading={loadingState} size={15} />
                       </button>
-                      <button className="btn btn-danger mt-3 ml-3" type='reset'>Réinitialiser</button>
+                      <button className="btn btn-danger mt-3 ml-3" type='reset' ref={myRefname}>Réinitialiser</button>
                     </CCardFooter>
               </CCard>
             </CCol>
