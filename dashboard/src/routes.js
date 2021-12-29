@@ -8,6 +8,9 @@ const Users = React.lazy(() => import('./views/users/Users'));
 const InstitutionForm = React.lazy(() => import('./views/institutions/InstitutionForm'));
 const Institutions = React.lazy(() => import('./views/institutions/Institutions'));
 
+const FaqForm = React.lazy(() => import('./views/faqs/FaqForm'));
+const Faqs = React.lazy(() => import('./views/faqs/Faqs'));
+
 const TestTypeForm = React.lazy(() => import('./views/test_types/TestTypeForm'));
 const TestTypes = React.lazy(() => import('./views/test_types/TestTypes'));
 
@@ -33,6 +36,10 @@ const routes = [
   { path: '/institutions/create', exact: true, name: 'Ajouter', component: InstitutionForm , roles:['ADMIN']},//CRAETE
   { path: '/institutions', exact: true,  name: 'Institutions', component: Institutions , roles:['ADMIN']},//READ
   { path: '/institutions/edit/:id', exact: true, name: 'Modifier', component: InstitutionForm , roles:['ADMIN']},//UPDATE
+
+  { path: '/faqs/create', exact: true, name: 'Ajouter', component: FaqForm , roles:['OPERATEUR']},//CRAETE
+  { path: '/faqs', exact: true,  name: 'faqs', component: Faqs , roles:['OPERATEUR']},//READ
+  { path: '/faqs/edit/:id', exact: true, name: 'Modifier', component: FaqForm , roles:['OPERATEUR']},//UPDATE
 
   { path: '/test_types/create', exact: true, name: 'Ajouter', component: TestTypeForm , roles:['ADMIN']},//CRAETE
   { path: '/test_types', exact: true,  name: 'Types de d\'essais ', component: TestTypes , roles:['ADMIN']},//READ

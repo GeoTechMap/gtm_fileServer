@@ -31,7 +31,12 @@ const _nav = {
       to: '/test_types',
       icon: 'cil-pencil',
     },
-
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Faqs',
+      to: '/faqs',
+      icon: 'cil-map',
+    },
   ],
   operateur:[
     {
