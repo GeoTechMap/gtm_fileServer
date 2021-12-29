@@ -35,7 +35,7 @@ const _nav = {
       _tag: 'CSidebarNavItem',
       name: 'Faqs',
       to: '/faqs',
-      icon: 'cil-map',
+      icon: 'cil-speech',
     },
   ],
   operateur:[
