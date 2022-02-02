@@ -251,7 +251,7 @@ if (connectedUser.institution === undefined) {
                       </CButton>
                     </CLink>
                       <CButton size="sm" color="danger" className="ml-1" onClick= {() =>{onDelete(item.idEssai)}}>
-                        Supprimmer
+                        Supprimer
                       </CButton>
                   </CCardBody>
                   :'' }

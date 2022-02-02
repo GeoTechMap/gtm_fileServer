@@ -94,7 +94,8 @@ const BasicForms = ({match}) => {
           .then((res) => {
             if(res.message !=='success'){
              console.log(res.message)
-             setErrorMessage(res.message);
+            //  setErrorMessage(res.message);
+            setErrorMessage('Une erreur s\'est produite. Veillez réessayer plus tard');
              setShowError(true)
              setLoadingState(false);
             }          
@@ -114,7 +115,8 @@ const BasicForms = ({match}) => {
           .then((res) => {
            if(res.message !=='success'){
             console.log(res.message)
-            setErrorMessage(res.message);
+            // setErrorMessage(res.message);
+            setErrorMessage('Une erreur s\'est produite. Veillez réessayer plus tard');
             setShowError(true)
             setLoadingState(false);
            }          

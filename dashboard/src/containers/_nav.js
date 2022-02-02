@@ -15,7 +15,7 @@ const _nav = {
     },
     {
       _tag: 'CSidebarNavItem',
-      name: 'Utilisateurs',
+      name: 'Opérateurs',
       to: '/utilisateurs',
       icon: 'cil-user',
     },

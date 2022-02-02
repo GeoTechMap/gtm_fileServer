@@ -40,6 +40,11 @@ export const TextField = ({label, type, options, ...props}) => {
         //     </CLabel>
         //     </CCol>
         //    :
+            type === "date" ?
+            <input type='date'
+            className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid' }`}
+            {...field} {...props}
+            />:
             <input 
             className={`form-control shadow-none ${meta.touched && meta.error && 'is-invalid' }`}
             {...field} {...props}

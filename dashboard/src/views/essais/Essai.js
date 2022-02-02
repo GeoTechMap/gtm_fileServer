@@ -39,10 +39,10 @@ const Essai = (props) => {
               <li>Longitude : {props.essai.longitudePosition}</li>
               <li>Altitude : {props.essai.altitudePosition}</li>
               <li>Département : {props.essai.departementPosition}</li>
-              {/* <li>Créé le : {props.essai.createdDateEssai}</li> */}
               <li>Date de réalisation: {props.essai.dateRealisationEssai}</li>
-              {/* <li>Dernière modification : {props.essai.lastModifiedDateEssai}</li>
-              <li>Modifié par: {props.essai.lastModifiedByEssai}</li> */}
+              <li>Créé le : {props.essai.createdDateEssai}</li>
+              <li>Dernière modification : {props.essai.lastModifiedDateEssai}</li>
+              <li>Modifié par: {props.essai.lastModifiedByEssai}</li>
               <li onClick={() => handleOnClick(props.essai)}><Link 
                 to={`/pdf/${props.essai.idFichier}`} 
                 >Voir résultat

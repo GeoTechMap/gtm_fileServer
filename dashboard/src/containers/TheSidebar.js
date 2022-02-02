@@ -26,20 +26,13 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" style={{color:'black'}} to="/">
-       <h4>Ge</h4>
-      {/* <CIcon
-          className="c-sidebar-brand-full"
-          name="target"
-          height={25}
-        /> */}
+      <CSidebarBrand className="d-md-down-none" style={{color:'white'}} to="/">
+      <h4>GTM</h4>
+      
+       {/* <h4>Ge</h4>
          <img src={logo}  width="30" height="30" alt="logo" style={{marginRight:'-5px'}}></img>
         <h4>TechMap</h4>
-        {/* <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        /> */}
+     */}
    
       </CSidebarBrand>
       {/* <CounterContextProvider>
